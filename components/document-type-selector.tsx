@@ -18,23 +18,23 @@ export default function DocumentTypeSelector({ onSelect }: DocumentTypeSelectorP
 
         <div className="grid gap-6 md:grid-cols-2">
           <Card
-            className="group cursor-pointer border-slate-700 bg-slate-800 p-8 transition-all hover:border-blue-500 hover:bg-slate-700"
+            className="group cursor-pointer border-slate-700 bg-slate-800 p-8 transition-all hover:border-primary hover:bg-slate-700"
             onClick={() => onSelect("invoice")}
           >
-            <div className="mb-4 text-4xl font-bold text-blue-500">📋</div>
+            <div className="mb-4 text-4xl font-bold text-primary">📋</div>
             <h2 className="text-2xl font-bold text-white">Invoice</h2>
             <p className="mt-2 text-slate-400">Create an invoice for completed work or delivered goods</p>
-            <Button className="mt-6 w-full bg-blue-600 hover:bg-blue-700">Create Invoice</Button>
+            <Button className="mt-6 w-full bg-primary hover:bg-primary/90 text-primary-foreground">Create Invoice</Button>
           </Card>
 
           <Card
-            className="group cursor-pointer border-slate-700 bg-slate-800 p-8 transition-all hover:border-emerald-500 hover:bg-slate-700"
+            className="group cursor-pointer border-slate-700 bg-slate-800 p-8 transition-all hover:border-secondary hover:bg-slate-700"
             onClick={() => onSelect("quotation")}
           >
-            <div className="mb-4 text-4xl font-bold text-emerald-500">💼</div>
+            <div className="mb-4 text-4xl font-bold text-secondary">💼</div>
             <h2 className="text-2xl font-bold text-white">Quotation</h2>
             <p className="mt-2 text-slate-400">Create a quotation for a potential project or service</p>
-            <Button className="mt-6 w-full bg-emerald-600 hover:bg-emerald-700">Create Quotation</Button>
+            <Button className="mt-6 w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground">Create Quotation</Button>
           </Card>
         </div>
       </div>

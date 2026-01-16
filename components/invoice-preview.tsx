@@ -26,6 +26,7 @@ interface FormData {
   items: Item[]
   discountType: "percentage" | "fixed"
   discountValue: number
+  additionalNote: string
 }
 
 interface InvoicePreviewProps {
@@ -54,8 +55,9 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
       />
 
       <div
+        id="printable-invoice"
         ref={previewRef}
-        className="space-y-6 rounded-lg border border-slate-600 bg-white p-8 text-black print:border-0"
+        className="space-y-6 rounded-lg border border-border bg-white p-8 text-black print:shadow-none print:border-0 print:rounded-none print:p-8 print:m-0 print:w-full print:max-w-none"
       >
         <DocumentHeader
           documentType={documentType}
@@ -65,24 +67,19 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
         />
 
         {/* Company Details */}
-        <div className="grid grid-cols-2 gap-8 border-b border-slate-200 pb-6">
+        <div className="grid grid-cols-2 gap-8 border-b border-border pb-6">
           <div>
-            <h3 className="font-bold text-slate-900">FROM:</h3>
-            <div className="mt-2 space-y-1 text-sm text-slate-700">
+            <h3 className="font-bold text-foreground">FROM:</h3>
+            <div className="mt-2 space-y-1 text-sm text-muted-foreground">
               <p className="font-semibold">Pravega Electricals</p>
               <p>No. 61/10, Rupasinghe Park</p>
               <p>Thihariya, Kalagedihena</p>
-              <p>Email: pravegaelectrical99@gmail.com</p>
-              <p>Phone: +94 70 516 0007</p>
-              <p>+94 77 897 9066 / +94 71 491 3220</p>
-              <p className="mt-2">
-                <span className="font-semibold">Proprietor:</span> J. P. Rajadisena
-              </p>
+
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-slate-900">BILL TO:</h3>
-            <div className="mt-2 space-y-1 text-sm text-slate-700">
+            <h3 className="font-bold text-foreground">BILL TO:</h3>
+            <div className="mt-2 space-y-1 text-sm text-muted-foreground">
               <p className="font-semibold">{formData.clientName || "Client Name"}</p>
               <p>{formData.clientAddress}</p>
               {formData.clientEmail && <p>Email: {formData.clientEmail}</p>}
@@ -93,8 +90,8 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
 
         {/* Description */}
         {formData.description && (
-          <div className="border-b border-slate-200 pb-4">
-            <p className="text-sm text-slate-700">
+          <div className="border-b border-border pb-4">
+            <p className="text-sm text-muted-foreground">
               <span className="font-semibold">Description:</span> {formData.description}
             </p>
           </div>
@@ -110,12 +107,20 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
           discountValue={formData.discountValue}
         />
 
+        {/* Additional Note */}
+        {formData.additionalNote && (
+          <div className="border-t border-border pt-4">
+            <h4 className="mb-2 font-bold text-foreground">Note:</h4>
+            <p className="whitespace-pre-wrap text-sm text-muted-foreground">{formData.additionalNote}</p>
+          </div>
+        )}
+
         {/* Footer */}
-        <div className="border-t-2 border-slate-300 pt-6">
+        <div className="border-t-2 border-border pt-6">
           <div className="grid grid-cols-2 gap-8">
             <div>
-              <h4 className="mb-2 font-bold text-slate-900">Bank Details:</h4>
-              <div className="space-y-1 text-sm text-slate-700">
+              <h4 className="mb-2 font-bold text-foreground">Bank Details:</h4>
+              <div className="space-y-1 text-sm text-muted-foreground">
                 <p>
                   <span className="font-semibold">Account Name:</span> J. P. Rajadisena
                 </p>
@@ -127,13 +132,17 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
                 </p>
               </div>
             </div>
-            <div className="flex flex-col items-center justify-center rounded border-2 border-dashed border-slate-300 bg-slate-50 p-8">
-              <p className="text-sm font-semibold text-slate-700">Company Seal / Signature</p>
-              <div className="mt-2 h-16 w-16 border border-slate-300"></div>
-            </div>
+            {<div className="space-y-1 text-sm text-muted-foreground">
+              <h4 className="mb-2 font-bold text-foreground">Contact Details:</h4>
+
+              <p>
+                <span className="font-semibold">Email:</span> pravegaelectrical99@gmail.com</p>
+              <p>
+                <span className="font-semibold">Phone:</span> +94 77 897 9066 / +94 71 491 3220</p>
+            </div>}
           </div>
           {documentType === "invoice" && (
-            <p className="mt-4 text-center text-xs text-slate-600">Payment due within 7 days of issue</p>
+            <p className="mt-4 text-center text-xs text-muted-foreground">Payment due within 7 days of issue</p>
           )}
         </div>
       </div>

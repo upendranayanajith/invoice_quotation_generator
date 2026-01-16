@@ -4,31 +4,48 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: 0 0% 98%;
-  --foreground: 220 13% 20%;
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: 217 91% 60%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 38 92% 50%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 220 13% 91%;
-  --input: oklch(0.922 0 0);
-  --ring: 217 91% 60%;
+  /* Soft Cool White Background */
+  --background: hsl(210 40% 98%);
+  /* Dark Navy Grey Foreground */
+  --foreground: hsl(222 47% 11%);
+
+  /* White Card */
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(222 47% 11%);
+
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(222 47% 11%);
+
+  /* Primary: Deep Royal Blue */
+  --primary: hsl(221 83% 53%);
+  --primary-foreground: hsl(0 0% 100%);
+
+  /* Secondary: Electric Amber */
+  --secondary: hsl(38 92% 50%);
+  --secondary-foreground: hsl(0 0% 100%);
+
+  /* Muted: Light Blue-Grey */
+  --muted: hsl(210 40% 96.1%);
+  --muted-foreground: hsl(215.4 16.3% 46.9%);
+
+  --accent: hsl(210 40% 96.1%);
+  --accent-foreground: hsl(222 47% 11%);
+
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(210 40% 98%);
+
+  --border: hsl(214.3 31.8% 91.4%);
+  --input: hsl(214.3 31.8% 91.4%);
+  --ring: hsl(221 83% 53%);
+
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
+
   --radius: 0.625rem;
+
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -40,30 +57,43 @@
 }
 
 .dark {
-  --background: 220 13% 13%;
-  --foreground: 0 0% 98%;
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: 217 91% 60%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 38 92% 50%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 220 13% 23%;
-  --input: oklch(0.269 0 0);
-  --ring: 217 91% 60%;
+  /* Deep Slate Blue Background */
+  --background: hsl(222 47% 11%);
+  /* Soft White Foreground */
+  --foreground: hsl(210 40% 98%);
+
+  --card: hsl(222 47% 11%);
+  --card-foreground: hsl(210 40% 98%);
+
+  --popover: hsl(222 47% 11%);
+  --popover-foreground: hsl(210 40% 98%);
+
+  /* Primary: Lighter Royal Blue */
+  --primary: hsl(217 91% 60%);
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(38 92% 50%);
+  --secondary-foreground: hsl(0 0% 0%);
+
+  --muted: hsl(217.2 32.6% 17.5%);
+  --muted-foreground: hsl(215 20.2% 65.1%);
+
+  --accent: hsl(217.2 32.6% 17.5%);
+  --accent-foreground: hsl(210 40% 98%);
+
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(210 40% 98%);
+
+  --border: hsl(217.2 32.6% 17.5%);
+  --input: hsl(217.2 32.6% 17.5%);
+  --ring: hsl(212.7 26.8% 83.9%);
+
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
+
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
@@ -118,15 +148,36 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
 @media print {
-  body {
-    background: white;
+  @page {
+    margin: 0;
+    size: auto;
   }
+
+  body {
+    visibility: hidden;
+  }
+
+  #printable-invoice {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 10mm;
+  }
+
+  #printable-invoice * {
+    visibility: visible;
+  }
+
   .no-print {
     display: none !important;
   }

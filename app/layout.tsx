@@ -10,7 +10,7 @@ const geistMono = Geist_Mono({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Pravega Electricals - Invoice & Quotation",
   description: "Professional invoice and quotation generator",
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export default function RootLayout({

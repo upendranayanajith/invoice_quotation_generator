@@ -20,8 +20,9 @@ export default function Page() {
     clientPhone: "",
     description: "",
     items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }],
-    discountType: "percentage" as const,
+    discountType: "percentage" as "percentage" | "fixed",
     discountValue: 0,
+    additionalNote: "",
   })
 
   const handleSelectDocumentType = (type: "invoice" | "quotation") => {
@@ -37,34 +38,34 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-slate-100">
+    <div className="min-h-screen bg-muted/40">
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 flex items-center justify-between no-print">
           <div>
-            <h1 className="text-4xl font-bold text-blue-900">
+            <h1 className="text-4xl font-bold text-primary">
               {documentType === "invoice" ? "Invoice" : "Quotation"} Generator
             </h1>
-            <p className="mt-1 text-slate-600">Pravega Electricals</p>
+            <p className="mt-1 text-muted-foreground">Pravega Electricals</p>
           </div>
           <Button
             variant="outline"
             onClick={() => setDocumentType(null)}
-            className="border-slate-300 text-slate-700 hover:bg-slate-200"
+            className="border-input text-foreground hover:bg-accent hover:text-accent-foreground"
           >
             Change Type
           </Button>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card className="border-slate-200 bg-white p-6 shadow-lg">
+          <Card className="border-border bg-card p-6 shadow-lg no-print text-card-foreground">
             <InvoiceForm documentType={documentType} formData={formData} onFormChange={setFormData} />
-            <Button className="mt-6 w-full bg-blue-600 hover:bg-blue-700" onClick={() => setShowPreview(true)}>
+            <Button className="mt-6 w-full bg-primary text-primary-foreground hover:bg-primary/90" onClick={() => setShowPreview(true)}>
               Preview Document
             </Button>
           </Card>
 
           {showPreview && (
-            <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-lg">
+            <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-lg text-black">
               <InvoicePreview documentType={documentType} formData={formData} />
             </div>
           )}
