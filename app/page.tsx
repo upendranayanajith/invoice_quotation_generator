@@ -7,6 +7,7 @@ import DocumentTypeSelector from "@/components/document-type-selector"
 import InvoiceForm from "@/components/invoice-form"
 import InvoicePreview from "@/components/invoice-preview"
 import { generateInvoiceNumber, generateTodayDate } from "@/lib/invoice-number-generator"
+import DocumentSearch from "@/components/document_search"
 
 export default function Page() {
   const [documentType, setDocumentType] = useState<"invoice" | "quotation" | null>(null)
@@ -31,6 +32,12 @@ export default function Page() {
       ...prev,
       documentNumber: generateInvoiceNumber(type),
     }))
+  }
+
+  const handleLoadDocument = (data: any, type: "invoice" | "quotation") => {
+    setDocumentType(type)
+    setFormData(data)
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   if (!documentType) {
@@ -69,6 +76,10 @@ export default function Page() {
               <InvoicePreview documentType={documentType} formData={formData} />
             </div>
           )}
+        </div>
+
+        <div className="mt-8 no-print">
+          <DocumentSearch onLoadDocument={handleLoadDocument} />
         </div>
       </div>
     </div>

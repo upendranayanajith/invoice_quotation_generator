@@ -1,11 +1,22 @@
 
 
-export function printDocument(): void {
+export function printDocument(filename?: string): void {
+  const originalTitle = document.title
   try {
+    if (filename) {
+      document.title = filename
+    }
     window.print()
   } catch (error) {
     console.error("Error printing document:", error)
     throw new Error("Failed to print document")
+  } finally {
+    if (filename) {
+      // Restore title after a short delay to ensure print dialog picks up the new name
+      setTimeout(() => {
+        document.title = originalTitle
+      }, 100)
+    }
   }
 }
 
