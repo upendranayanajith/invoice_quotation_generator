@@ -1,23 +1,71 @@
+"use client"
+
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { LayoutDashboard, FileText, FilePlus, Search, Menu, LogOut } from "lucide-react"
 import { logout } from "@/app/actions/auth"
-import { LogOut } from "lucide-react"
 
-// ... inside AppSidebar ...
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
-return (
-    <>
-        {/* Mobile Sidebar */}
-        <div className="flex items-center p-4 lg:hidden">
-            <Sheet>
-                {/* ... existing sheet code ... */}
-            </Sheet>
-        </div>
+export default function AppSidebar() {
+    const pathname = usePathname()
 
-        {/* Desktop Sidebar */}
-        <div className="hidden h-screen w-64 border-r bg-muted/40 lg:block">
-            <SidebarContent routes={routes} />
-        </div>
-    </>
-)
+    const routes = [
+        {
+            href: "/",
+            label: "Dashboard",
+            icon: LayoutDashboard,
+            active: pathname === "/",
+        },
+        {
+            href: "/editor",
+            label: "Generator",
+            icon: FilePlus,
+            active: pathname === "/editor",
+        },
+        {
+            href: "/invoices",
+            label: "Invoices",
+            icon: FileText,
+            active: pathname === "/invoices",
+        },
+        {
+            href: "/quotations",
+            label: "Quotations",
+            icon: FileText,
+            active: pathname === "/quotations",
+        },
+        {
+            href: "/search",
+            label: "Search",
+            icon: Search,
+            active: pathname === "/search",
+        },
+    ]
+
+    return (
+        <>
+            {/* Mobile Sidebar */}
+            <div className="flex items-center p-4 lg:hidden">
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <Button variant="outline" size="icon">
+                            <Menu className="h-6 w-6" />
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="w-64 p-0">
+                        <SidebarContent routes={routes} />
+                    </SheetContent>
+                </Sheet>
+            </div>
+
+            {/* Desktop Sidebar */}
+            <div className="hidden h-screen w-64 border-r bg-muted/40 lg:block">
+                <SidebarContent routes={routes} />
+            </div>
+        </>
+    )
 }
 
 function SidebarContent({ routes }: { routes: any[] }) {
