@@ -30,7 +30,7 @@ export function OverviewChart({ data }: OverviewChartProps) {
                     tickFormatter={(value) => `LKR ${value}`}
                 />
                 <Tooltip
-                    formatter={(value) => value.toLocaleString('en-LK', { style: 'currency', currency: 'LKR' })}
+                    formatter={(value: any) => (value || 0).toLocaleString('en-LK', { style: 'currency', currency: 'LKR' })}
                     labelStyle={{ color: 'black' }}
                 />
                 <Legend />
