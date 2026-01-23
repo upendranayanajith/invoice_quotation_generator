@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import ItemsTable from "@/components/items-table"
+import { ClientSelector } from "@/components/client-selector"
+import { db } from "@/lib/db"
 
 interface Item {
   id: number
@@ -47,6 +49,20 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
     })
   }
 
+  const handleClientSelect = (client: any) => {
+    // Auto-fill form
+    onFormChange({
+      ...formData,
+      clientName: client.name,
+      clientAddress: client.address || "",
+      clientEmail: client.email || "",
+      clientPhone: client.phone || ""
+    })
+
+    // Save to registry (update timestamp or create if new)
+    db.saveClient(client);
+  }
+
   return (
     <div className="space-y-6">
       {/* Document Details */}
@@ -79,11 +95,9 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
         <h3 className="font-semibold text-foreground">Client Details</h3>
         <div>
           <Label className="text-muted-foreground">Client Name</Label>
-          <Input
+          <ClientSelector
             value={formData.clientName}
-            onChange={(e) => handleInputChange("clientName", e.target.value)}
-            placeholder="Enter client name"
-            className="border-input bg-background text-foreground placeholder:text-muted-foreground"
+            onSelect={handleClientSelect}
           />
         </div>
         <div>
@@ -175,17 +189,6 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
             />
           </div>
         </div>
-         {/* Additional Note */}
-      <div className="space-y-2">
-        <Label className="text-muted-foreground">Note (Optional)</Label>
-        <Textarea
-          value={formData.additionalNote}
-          onChange={(e) => handleInputChange("additionalNote", e.target.value)}
-          placeholder="Enter additional notes, terms, or comments..."
-          className="border-input bg-background text-foreground placeholder:text-muted-foreground"
-          rows={3}
-        />
-      </div>
       </div>
     </div>
   )
