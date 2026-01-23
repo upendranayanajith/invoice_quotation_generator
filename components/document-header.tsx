@@ -6,6 +6,7 @@ interface DocumentHeaderProps {
   date: string
   companyName?: string
   companyLogo?: string
+  regNo?: string
 }
 
 export default function DocumentHeader({
@@ -14,6 +15,7 @@ export default function DocumentHeader({
   date,
   companyName = "Pravega Electricals",
   companyLogo = "/pravega-logo.png",
+  regNo,
 }: DocumentHeaderProps) {
   const title = documentType === "invoice" ? "INVOICE" : "QUOTATION"
   const labelText = documentType === "invoice" ? "Invoice" : "Quotation"
@@ -38,6 +40,9 @@ export default function DocumentHeader({
         </p>
         <p className="mt-2">
           <span className="font-semibold text-primary">Date:</span> {date}
+        </p>
+        <p className="mt-2 font-medium text-gray-400 ">
+          Reg No. WIATT/L/1439
         </p>
       </div>
     </div>
