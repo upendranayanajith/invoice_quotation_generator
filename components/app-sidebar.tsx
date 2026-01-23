@@ -61,7 +61,7 @@ export default function AppSidebar() {
             </div>
 
             {/* Desktop Sidebar */}
-            <div className="hidden h-screen w-64 border-r bg-muted/40 lg:block">
+            <div className="hidden h-full w-64 lg:block">
                 <SidebarContent routes={routes} />
             </div>
         </>
