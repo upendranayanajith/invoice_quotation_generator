@@ -41,6 +41,7 @@ export const dbService = {
             const q = query(collectionRef, where("documentNumber", "==", document.documentNumber));
             const querySnapshot = await getDocs(q);
 
+
             const payload = {
                 type,
                 documentNumber: document.documentNumber,
