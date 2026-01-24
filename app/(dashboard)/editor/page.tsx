@@ -184,7 +184,7 @@ function EditorContent() {
                         <h1 className="text-4xl font-bold text-primary">
                             {documentType === "invoice" ? "Invoice" : "Quotation"} Generator
                         </h1>
-                        <p className="mt-1 text-muted-foreground">Pravega Electricals</p>
+                        <p className="mt-1 text-muted-foreground">{process.env.NEXT_PUBLIC_COMPANY_NAME || "Company Name"}</p>
                     </div>
                     <div className="flex gap-2">
                         <Button

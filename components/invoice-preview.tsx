@@ -61,7 +61,7 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
       >
         {/* Watermark Overlay */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-10">
-          <img src="/pravega-logo.png" alt="" className="w-3/4 h-3/4 object-contain" />
+          <img src={process.env.NEXT_PUBLIC_COMPANY_LOGO_PATH || "/placeholder-logo.png"} alt="" className="w-3/4 h-3/4 object-contain" />
         </div>
 
         {/* Content wrapper with relative positioning to sit above watermark */}
@@ -70,7 +70,7 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
             documentType={documentType}
             documentNumber={formData.documentNumber}
             date={formData.date}
-            companyName="Pravega Electricals"
+            companyName={process.env.NEXT_PUBLIC_COMPANY_NAME || "Company Name"}
           />
 
           {/* Company Details */}
@@ -78,9 +78,8 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
             <div>
               <h3 className="font-bold text-foreground">FROM:</h3>
               <div className="mt-2 space-y-1 text-sm text-muted-foreground">
-                <p className="font-semibold">Pravega Electricals</p>
-                <p>No. 61/10, Rupasinghe Park</p>
-                <p>Thihariya, Kalagedihena</p>
+                <p className="font-semibold">{process.env.NEXT_PUBLIC_COMPANY_NAME || "Company Name"}</p>
+                <div className="whitespace-pre-line">{process.env.NEXT_PUBLIC_COMPANY_ADDRESS || "Address Line 1\nAddress Line 2"}</div>
 
               </div>
             </div>
@@ -129,13 +128,14 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
                 <h4 className="mb-2 font-bold text-foreground">Bank Details:</h4>
                 <div className="space-y-1 text-sm text-muted-foreground">
                   <p>
-                    <span className="font-semibold">Account Name:</span> J. P. Rajadisena
+                    <span className="font-semibold">Account Name:</span> {process.env.NEXT_PUBLIC_BANK_ACCOUNT_NAME || "Account Name"}
                   </p>
                   <p>
-                    <span className="font-semibold">Bank:</span> Peoples Bank – Nittambuwa Branch
+                    <span className="font-semibold">Bank:</span> {process.env.NEXT_PUBLIC_BANK_NAME || "Bank Name"}
+                    {process.env.NEXT_PUBLIC_BANK_BRANCH ? ` – ${process.env.NEXT_PUBLIC_BANK_BRANCH}` : ""}
                   </p>
                   <p>
-                    <span className="font-semibold">Account Number:</span> 278200128206775
+                    <span className="font-semibold">Account Number:</span> {process.env.NEXT_PUBLIC_BANK_ACCOUNT_NUMBER || "0000000000"}
                   </p>
                 </div>
               </div>
@@ -143,9 +143,9 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
                 <h4 className="mb-2 font-bold text-foreground">Contact Details:</h4>
 
                 <p>
-                  <span className="font-semibold">Email:</span> pravegaelectrical99@gmail.com</p>
+                  <span className="font-semibold">Email:</span> {process.env.NEXT_PUBLIC_COMPANY_EMAIL || "email@example.com"}</p>
                 <p>
-                  <span className="font-semibold">Phone:</span> +94 77 897 9066 / +94 71 491 3220</p>
+                  <span className="font-semibold">Phone:</span> {process.env.NEXT_PUBLIC_COMPANY_PHONE || "+00 000 000 000"}</p>
               </div>}
             </div>
             {documentType === "invoice" && (

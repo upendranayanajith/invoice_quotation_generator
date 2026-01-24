@@ -56,7 +56,7 @@ export default function LoginPage() {
                             <Zap className="h-8 w-8 text-white" fill="currentColor" />
                         </div>
                         <h1 className="text-3xl font-bold tracking-tight text-white">
-                            Pravega Electricals
+                            {process.env.NEXT_PUBLIC_COMPANY_NAME || "Company Name"}
                         </h1>
                         <p className="text-slate-400">
                             Enter your credentials to access the dashboard
@@ -105,7 +105,7 @@ export default function LoginPage() {
 
                     {/* Footer */}
                     <div className="text-center text-xs text-slate-500 pt-4 border-t border-white/5">
-                        Protected System &copy; {new Date().getFullYear()} Pravega Electricals
+                        Protected System &copy; {new Date().getFullYear()} {process.env.NEXT_PUBLIC_COMPANY_NAME || "Company Name"}
                     </div>
                 </div>
             </div>

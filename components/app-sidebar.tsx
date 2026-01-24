@@ -74,7 +74,7 @@ function SidebarContent({ routes }: { routes: any[] }) {
             <div className="flex h-14 items-center border-b px-6">
                 <Link href="/" className="flex items-center gap-2 font-bold text-xl text-primary">
                     {/* <img src="/placeholder-logo.png" alt="Logo" className="h-8 w-8" /> */}
-                    <span>Pravega</span>
+                    <span>{process.env.NEXT_PUBLIC_COMPANY_NAME || "Company Name"}</span>
                 </Link>
             </div>
             <div className="flex-1 overflow-auto py-2">

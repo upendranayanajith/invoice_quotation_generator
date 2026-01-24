@@ -13,9 +13,9 @@ export default function DocumentHeader({
   documentType,
   documentNumber,
   date,
-  companyName = "Pravega Electricals",
-  companyLogo = "/pravega-logo.png",
-  regNo,
+  companyName = process.env.NEXT_PUBLIC_COMPANY_NAME || "Company Name",
+  companyLogo = process.env.NEXT_PUBLIC_COMPANY_LOGO_PATH || "/placeholder-logo.png",
+  regNo = process.env.NEXT_PUBLIC_COMPANY_REG_NO,
 }: DocumentHeaderProps) {
   const title = documentType === "invoice" ? "INVOICE" : "QUOTATION"
   const labelText = documentType === "invoice" ? "Invoice" : "Quotation"
@@ -41,9 +41,11 @@ export default function DocumentHeader({
         <p className="mt-2">
           <span className="font-semibold text-primary">Date:</span> {date}
         </p>
-        <p className="mt-2 font-medium text-gray-400 ">
-          Reg No. WIATT/L/1439
-        </p>
+        {regNo && (
+          <p className="mt-2 font-medium text-gray-400 ">
+            {regNo}
+          </p>
+        )}
       </div>
     </div>
   )

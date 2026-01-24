@@ -9,7 +9,7 @@ const geist = Geist({ subsets: ["latin"] })
 const geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Pravega Electricals - Invoice & Quotation",
+  title: `${process.env.NEXT_PUBLIC_COMPANY_NAME || "Company Name"} - Invoice & Quotation`,
   description: "Professional invoice and quotation generator",
   generator: 'v0.app'
 }

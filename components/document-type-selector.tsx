@@ -12,7 +12,7 @@ export default function DocumentTypeSelector({ onSelect }: DocumentTypeSelectorP
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 px-4">
       <div className="w-full max-w-2xl">
         <div className="mb-12 text-center">
-          <h1 className="text-4xl font-bold text-white">Pravega Electricals</h1>
+          <h1 className="text-4xl font-bold text-white">{process.env.NEXT_PUBLIC_COMPANY_NAME || "Company Name"}</h1>
           <p className="mt-4 text-xl text-slate-400">Select Document Type</p>
         </div>
 
