@@ -173,7 +173,10 @@ function EditorContent() {
 
             if (confirm("Document saved! Do you want to download/print the PDF now?")) {
                 const originalTitle = document.title;
-                document.title = `${documentType === 'invoice' ? 'INV' : 'QT'}-${formData.documentNumber}`;
+                const typeCode = documentType === 'invoice' ? 'I' : 'Q';
+                const safeClientName = formData.clientName.replace(/[^a-zA-Z0-9\s]/g, '').trim() || 'Unknown_Client';
+                const safeDate = formData.date.replace(/[^a-zA-Z0-9-]/g, '');
+                document.title = `${safeClientName}_${safeDate}_${typeCode}`;
 
                 setTimeout(() => {
                     window.print();

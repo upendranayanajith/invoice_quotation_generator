@@ -181,9 +181,6 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-bold text-foreground">Items & Sections</h3>
-          <Button onClick={addSection} variant="outline" size="sm" className="bg-blue-50 text-blue-600 border-blue-200 hover:bg-blue-100">
-            <Plus className="mr-2 h-4 w-4" /> Add New Section
-          </Button>
         </div>
 
         {formData.sections.map((section, index) => (
@@ -218,6 +215,10 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
             />
           </div>
         ))}
+
+        <Button onClick={addSection} variant="outline" className="w-full bg-blue-50 text-blue-600 border-blue-200 hover:bg-blue-100 border-dashed">
+          <Plus className="mr-2 h-4 w-4" /> Add New Section
+        </Button>
       </div>
 
       {/* Additional Note */}

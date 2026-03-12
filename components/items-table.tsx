@@ -116,23 +116,23 @@ export default function ItemsTable({ items, onItemsChange, editable = false, sho
 
   // Display mode - for preview/print
   return (
-    <div className="border-b border-border pb-6">
+    <div className="border-b border-slate-200 pb-2">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b-2 border-border bg-muted">
-            <th className="px-4 py-3 text-left font-semibold text-foreground">Item / Service</th>
-            <th className="px-4 py-3 text-right font-semibold text-foreground">Qty</th>
-            <th className="px-4 py-3 text-right font-semibold text-foreground">Unit Price (Rs)</th>
-            <th className="px-4 py-3 text-right font-semibold text-foreground">Total (Rs)</th>
+          <tr className="border-b border-slate-300 bg-slate-50/50">
+            <th className="px-2 py-1.5 text-left font-semibold text-slate-700">Item / Service</th>
+            <th className="px-2 py-1.5 text-right font-semibold text-slate-700">Qty</th>
+            <th className="px-2 py-1.5 text-right font-semibold text-slate-700">Unit Price (Rs)</th>
+            <th className="px-2 py-1.5 text-right font-semibold text-slate-700">Total (Rs)</th>
           </tr>
         </thead>
         <tbody>
           {items.map((item) => (
-            <tr key={item.id} className="border-b border-border hover:bg-muted/50">
-              <td className="px-4 py-3 text-muted-foreground">{item.name}</td>
-              <td className="px-4 py-3 text-right text-muted-foreground">{item.quantity}</td>
-              <td className="px-4 py-3 text-right text-muted-foreground">{item.unitPrice.toFixed(2)}</td>
-              <td className="px-4 py-3 text-right font-semibold text-foreground">
+            <tr key={item.id} className="border-b border-slate-100/50 hover:bg-slate-50/50">
+              <td className="px-2 py-1.5 text-slate-600">{item.name}</td>
+              <td className="px-2 py-1.5 text-right text-slate-600">{item.quantity}</td>
+              <td className="px-2 py-1.5 text-right text-slate-600">{item.unitPrice.toFixed(2)}</td>
+              <td className="px-2 py-1.5 text-right font-medium text-slate-800">
                 {(item.quantity * item.unitPrice).toFixed(2)}
               </td>
             </tr>

@@ -63,15 +63,15 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
       <div
         id="printable-invoice"
         ref={previewRef}
-        className="relative space-y-6 rounded-lg border border-border bg-white p-8 text-black print:shadow-none print:border-0 print:rounded-none print:p-8 print:m-0 print:w-full print:max-w-none"
+        className="relative space-y-4 rounded-lg border border-border bg-white p-6 text-black print:shadow-none print:border-0 print:rounded-none print:p-4 print:m-0 print:w-full print:max-w-none print:!block"
       >
         {/* Watermark Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-10">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-10 print:fixed print:top-1/2 print:left-1/2 print:-translate-x-1/2 print:-translate-y-1/2">
           <img src={process.env.NEXT_PUBLIC_COMPANY_LOGO_PATH || "/placeholder-logo.png"} alt="" className="w-3/4 h-3/4 object-contain" />
         </div>
 
         {/* Content wrapper with relative positioning to sit above watermark */}
-        <div className="relative z-10 space-y-6">
+        <div className="relative z-10 space-y-4">
           <DocumentHeader
             documentType={documentType}
             documentNumber={formData.documentNumber}
@@ -80,7 +80,7 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
           />
 
           {/* Company Details */}
-          <div className="grid grid-cols-2 gap-8 border-b border-border pb-6">
+          <div className="grid grid-cols-2 gap-8 border-b border-slate-200 pb-4">
             <div>
               <h3 className="font-bold text-foreground">FROM:</h3>
               <div className="mt-2 space-y-1 text-sm text-muted-foreground">
@@ -102,71 +102,73 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
 
           {/* Description */}
           {formData.description && (
-            <div className="border-b border-border pb-4">
-              <p className="text-sm text-muted-foreground">
-                <span className="font-semibold">Description:</span> {formData.description}
+            <div className="border-b border-slate-200 pb-2">
+              <p className="text-sm text-slate-600">
+                <span className="font-semibold text-slate-800">Description:</span> {formData.description}
               </p>
             </div>
           )}
 
           {/* Sections Loop */}
-          <div className="space-y-8">
+          <div className="space-y-4">
             {formData.sections.map((section) => (
-              <div key={section.id} className="space-y-2">
+              <div key={section.id} className="space-y-2 print:break-inside-avoid">
                 <h3 className="text-md font-bold uppercase tracking-wide text-slate-700 border-b border-slate-100 pb-1">
                   {section.title}
                 </h3>
                 <ItemsTable items={section.items} onItemsChange={handleItemsChange} editable={false} showAddButton={false} />
                 <div className="flex justify-end pr-4">
                   <p className="text-sm font-semibold text-slate-600">
-                    Section Subtotal: Rs {calculations.perSectionTotals[section.id]?.toFixed(2)}
+                    Total: Rs {calculations.perSectionTotals[section.id]?.toFixed(2)}
                   </p>
                 </div>
               </div>
             ))}
           </div>
 
-          <TotalsSummary
-            subtotal={calculations.subtotal}
-            discount={calculations.discount}
-            grandTotal={calculations.grandTotal}
-            discountType={formData.discountType}
-            discountValue={formData.discountValue}
-          />
+          <div className="print:break-inside-avoid">
+            <TotalsSummary
+              subtotal={calculations.subtotal}
+              discount={calculations.discount}
+              grandTotal={calculations.grandTotal}
+              discountType={formData.discountType}
+              discountValue={formData.discountValue}
+            />
+          </div>
 
           {/* Additional Note */}
           {formData.additionalNote && (
-            <div className="border-t border-border pt-4">
+            <div className="border-t border-border pt-4 print:break-inside-avoid">
               <h4 className="mb-2 font-bold text-foreground">Note:</h4>
               <p className="whitespace-pre-wrap text-sm text-muted-foreground">{formData.additionalNote}</p>
             </div>
           )}
 
           {/* Footer */}
-          <div className="border-t-2 border-border pt-6">
+          <div className="border-t border-slate-300 pt-4 print:break-inside-avoid">
             <div className="grid grid-cols-2 gap-8">
               <div>
-                <h4 className="mb-2 font-bold text-foreground">Bank Details:</h4>
-                <div className="space-y-1 text-sm text-muted-foreground">
+                <h4 className="mb-2 font-bold text-slate-800">Bank Details:</h4>
+                <div className="space-y-1 text-sm text-slate-600">
                   <p>
-                    <span className="font-semibold">Account Name:</span> {process.env.NEXT_PUBLIC_BANK_ACCOUNT_NAME || "Account Name"}
+                    <span className="font-semibold text-slate-700">Account Name:</span> {process.env.NEXT_PUBLIC_BANK_ACCOUNT_NAME || "Account Name"}
                   </p>
                   <p>
-                    <span className="font-semibold">Bank:</span> {process.env.NEXT_PUBLIC_BANK_NAME || "Bank Name"}
+                    <span className="font-semibold text-slate-700">Bank:</span> {process.env.NEXT_PUBLIC_BANK_NAME || "Bank Name"}
                     {process.env.NEXT_PUBLIC_BANK_BRANCH ? ` – ${process.env.NEXT_PUBLIC_BANK_BRANCH}` : ""}
                   </p>
                   <p>
-                    <span className="font-semibold">Account Number:</span> {process.env.NEXT_PUBLIC_BANK_ACCOUNT_NUMBER || "0000000000"}
+                    <span className="font-semibold text-slate-700">Account Number:</span> {process.env.NEXT_PUBLIC_BANK_ACCOUNT_NUMBER || "0000000000"}
                   </p>
                 </div>
               </div>
-              {<div className="space-y-1 text-sm text-muted-foreground">
-                <h4 className="mb-2 font-bold text-foreground">Contact Details:</h4>
+              {<div className="space-y-1 text-sm text-slate-600">
+                <h4 className="mb-2 font-bold text-slate-800">Contact Details:</h4>
 
                 <p>
-                  <span className="font-semibold">Email:</span> {process.env.NEXT_PUBLIC_COMPANY_EMAIL || "email@example.com"}</p>
+                  <span className="font-semibold text-slate-700">Email:</span> {process.env.NEXT_PUBLIC_COMPANY_EMAIL || "email@example.com"}</p>
                 <p>
-                  <span className="font-semibold">Phone:</span> {process.env.NEXT_PUBLIC_COMPANY_PHONE || "+00 000 000 000"}</p>
+                  <span className="font-semibold text-slate-700">Phone:</span> {process.env.NEXT_PUBLIC_COMPANY_PHONE || "+00 000 000 000"}</p>
               </div>}
             </div>
             {documentType === "invoice" && (

@@ -14,7 +14,18 @@ interface ExportActionsProps {
 
 export default function ExportActions({ documentType, documentNumber, date, previewRef, formData, variant }: ExportActionsProps) {
     const handlePrint = () => {
-        window.print()
+        const originalTitle = document.title;
+        if (formData && documentType) {
+            const typeCode = documentType === "invoice" ? "I" : "Q";
+            const safeClientName = (formData.clientName || "Unknown_Client").replace(/[^a-zA-Z0-9\s]/g, "").trim();
+            const safeDate = (formData.date || date || "").replace(/[^a-zA-Z0-9-]/g, "");
+            document.title = `${safeClientName}_${safeDate}_${typeCode}`;
+        }
+
+        setTimeout(() => {
+            window.print()
+            document.title = originalTitle;
+        }, 100);
     }
 
     return (
