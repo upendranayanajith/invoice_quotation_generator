@@ -260,5 +260,6 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
           </div>
         </div>
       </div>
-      )
+    </div>
+  )
 }
