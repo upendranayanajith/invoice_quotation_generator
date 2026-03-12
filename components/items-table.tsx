@@ -47,7 +47,6 @@ export default function ItemsTable({ items, onItemsChange, editable = false, sho
   if (editable) {
     return (
       <div className="space-y-4">
-        <h3 className="font-semibold text-foreground">Items / Services</h3>
         {items.map((item) => (
           <div key={item.id} className="space-y-2 rounded-lg border border-border p-3">
             <div>

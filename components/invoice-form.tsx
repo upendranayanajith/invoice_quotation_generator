@@ -6,15 +6,23 @@ import { Textarea } from "@/components/ui/textarea"
 import ItemsTable from "@/components/items-table"
 import { ClientSelector } from "@/components/client-selector"
 import { db } from "@/lib/db"
+import { Button } from "@/components/ui/button"
+import { Plus, Trash2 } from "lucide-react"
 
-interface Item {
+export interface Item {
   id: number
   name: string
   quantity: number
   unitPrice: number
 }
 
-interface FormData {
+export interface Section {
+  id: number
+  title: string
+  items: Item[]
+}
+
+export interface FormData {
   documentNumber: string
   date: string
   clientName: string
@@ -22,7 +30,7 @@ interface FormData {
   clientEmail: string
   clientPhone: string
   description: string
-  items: Item[]
+  sections: Section[]
   discountType: "percentage" | "fixed"
   discountValue: number
   additionalNote: string
@@ -31,7 +39,7 @@ interface FormData {
 interface InvoiceFormProps {
   documentType: "invoice" | "quotation"
   formData: FormData
-  onFormChange: (data: FormData) => void
+  onFormChange: (data: FormData | any) => void
 }
 
 export default function InvoiceForm({ documentType, formData, onFormChange }: InvoiceFormProps) {
@@ -42,11 +50,36 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
     })
   }
 
-  const handleItemsChange = (items: Item[]) => {
+  const handleSectionChange = (sectionId: number, field: string, value: any) => {
+    const updatedSections = formData.sections.map(section =>
+      section.id === sectionId ? { ...section, [field]: value } : section
+    );
+    onFormChange({ ...formData, sections: updatedSections });
+  }
+
+  const handleSectionItemsChange = (sectionId: number, items: Item[]) => {
+    const updatedSections = formData.sections.map(section =>
+      section.id === sectionId ? { ...section, items } : section
+    );
+    onFormChange({ ...formData, sections: updatedSections });
+  }
+
+  const addSection = () => {
+    const newId = formData.sections.length > 0 ? Math.max(...formData.sections.map(s => s.id)) + 1 : 1;
+    const newSection: Section = {
+      id: newId,
+      title: `Section ${newId}`,
+      items: [{ id: Date.now(), name: "", quantity: 1, unitPrice: 0 }]
+    };
+    onFormChange({ ...formData, sections: [...formData.sections, newSection] });
+  }
+
+  const removeSection = (sectionId: number) => {
+    if (formData.sections.length <= 1) return;
     onFormChange({
       ...formData,
-      items,
-    })
+      sections: formData.sections.filter(s => s.id !== sectionId)
+    });
   }
 
   const handleClientSelect = (client: any) => {
@@ -144,6 +177,49 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
         />
       </div>
 
+      {/* Sections */}
+      <div className="space-y-8">
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-bold text-foreground">Items & Sections</h3>
+          <Button onClick={addSection} variant="outline" size="sm" className="bg-blue-50 text-blue-600 border-blue-200 hover:bg-blue-100">
+            <Plus className="mr-2 h-4 w-4" /> Add New Section
+          </Button>
+        </div>
+
+        {formData.sections.map((section, index) => (
+          <div key={section.id} className="space-y-4 rounded-xl border-2 border-slate-100 p-6 shadow-sm bg-slate-50/30">
+            <div className="flex items-center gap-4">
+              <div className="flex-1">
+                <Label className="text-xs font-bold uppercase tracking-wider text-slate-500">Section Title</Label>
+                <Input
+                  value={section.title}
+                  onChange={(e) => handleSectionChange(section.id, "title", e.target.value)}
+                  placeholder="e.g., Labor Charges, Material Costs..."
+                  className="mt-1 border-slate-200 bg-white font-semibold text-slate-800"
+                />
+              </div>
+              {formData.sections.length > 1 && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => removeSection(section.id)}
+                  className="mt-6 text-red-500 hover:bg-red-50 hover:text-red-600"
+                >
+                  <Trash2 className="h-5 w-5" />
+                </Button>
+              )}
+            </div>
+
+            <ItemsTable
+              items={section.items}
+              onItemsChange={(items) => handleSectionItemsChange(section.id, items)}
+              editable={true}
+              showAddButton={true}
+            />
+          </div>
+        ))}
+      </div>
+
       {/* Additional Note */}
       <div className="space-y-2">
         <Label className="text-muted-foreground">Note (Optional)</Label>
@@ -154,12 +230,6 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
           className="border-input bg-background text-foreground placeholder:text-muted-foreground"
           rows={3}
         />
-      </div>
-
-      {/* Items */}
-      <div className="space-y-4">
-        {/* <h3 className="font-semibold text-foreground">Items / Services</h3> */}
-        <ItemsTable items={formData.items} onItemsChange={handleItemsChange} editable={true} showAddButton={true} />
       </div>
 
       {/* Discount */}
@@ -190,6 +260,5 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
           </div>
         </div>
       </div>
-    </div>
-  )
+      )
 }

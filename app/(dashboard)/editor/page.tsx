@@ -28,7 +28,7 @@ function EditorContent() {
         clientEmail: "",
         clientPhone: "",
         description: "",
-        items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }],
+        sections: [{ id: 1, title: "Standard Items", items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }] }],
         discountType: "percentage" as "percentage" | "fixed",
         discountValue: 0,
         additionalNote: "",
@@ -57,9 +57,20 @@ function EditorContent() {
                         newDocNumber = generateInvoiceNumber(doc.type)
                     }
 
+                    // Migration logic for old documents without sections
+                    const migratingData = { ...doc.data };
+                    if (migratingData.items && !migratingData.sections) {
+                        migratingData.sections = [{
+                            id: 1,
+                            title: "Items",
+                            items: migratingData.items
+                        }];
+                        delete migratingData.items;
+                    }
+
                     setDocumentType(targetType)
                     setFormData({
-                        ...doc.data,
+                        ...migratingData,
                         documentNumber: newDocNumber,
                         date: isViewMode ? doc.data.date : generateTodayDate(),
                     })
@@ -84,8 +95,19 @@ function EditorContent() {
     }
 
     const handleLoadDocument = (data: any, type: "invoice" | "quotation") => {
+        // Migration logic for loaded documents
+        const migratingData = { ...data };
+        if (migratingData.items && !migratingData.sections) {
+            migratingData.sections = [{
+                id: 1,
+                title: "Items",
+                items: migratingData.items
+            }];
+            delete migratingData.items;
+        }
+
         setDocumentType(type)
-        setFormData(data)
+        setFormData(migratingData)
         window.scrollTo({ top: 0, behavior: "smooth" })
     }
 
@@ -98,7 +120,7 @@ function EditorContent() {
                 clientEmail: "",
                 clientPhone: "",
                 description: "",
-                items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }],
+                sections: [{ id: 1, title: "Standard Items", items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }] }],
                 discountValue: 0,
                 additionalNote: "",
                 // Keep documentNumber and date
@@ -117,7 +139,7 @@ function EditorContent() {
                 clientEmail: "",
                 clientPhone: "",
                 description: "",
-                items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }],
+                sections: [{ id: 1, title: "Standard Items", items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }] }],
                 discountType: "percentage",
                 discountValue: 0,
                 additionalNote: "",
@@ -128,8 +150,11 @@ function EditorContent() {
     const handleSave = async () => {
         if (!documentType) return;
 
-        // Calculate Grand Total
-        const itemsTotal = formData.items.reduce((sum, item) => sum + (item.quantity * item.unitPrice), 0);
+        // Calculate Grand Total across all sections
+        const itemsTotal = formData.sections.reduce((total, section) => {
+            return total + section.items.reduce((sum, item) => sum + (item.quantity * item.unitPrice), 0);
+        }, 0);
+
         let discountAmount = 0;
         if (formData.discountType === "percentage") {
             discountAmount = itemsTotal * (formData.discountValue / 100);

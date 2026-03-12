@@ -8,14 +8,20 @@ import TotalsSummary from "@/components/totals-summary"
 import ExportActions from "@/components/export-actions"
 import { getAllCalculations } from "@/lib/calculations"
 
-interface Item {
+export interface Item {
   id: number
   name: string
   quantity: number
   unitPrice: number
 }
 
-interface FormData {
+export interface Section {
+  id: number
+  title: string
+  items: Item[]
+}
+
+export interface FormData {
   documentNumber: string
   date: string
   clientName: string
@@ -23,7 +29,7 @@ interface FormData {
   clientEmail: string
   clientPhone: string
   description: string
-  items: Item[]
+  sections: Section[]
   discountType: "percentage" | "fixed"
   discountValue: number
   additionalNote: string
@@ -37,7 +43,7 @@ interface InvoicePreviewProps {
 export default function InvoicePreview({ documentType, formData }: InvoicePreviewProps) {
   const previewRef = useRef<HTMLDivElement>(null)
 
-  const calculations = getAllCalculations(formData.items, formData.discountValue, formData.discountType)
+  const calculations = getAllCalculations(formData.sections, formData.discountValue, formData.discountType)
 
   const handleItemsChange = () => {
     // Items are managed at the page level, this is read-only in preview
@@ -103,7 +109,22 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
             </div>
           )}
 
-          <ItemsTable items={formData.items} onItemsChange={handleItemsChange} editable={false} showAddButton={false} />
+          {/* Sections Loop */}
+          <div className="space-y-8">
+            {formData.sections.map((section) => (
+              <div key={section.id} className="space-y-2">
+                <h3 className="text-md font-bold uppercase tracking-wide text-slate-700 border-b border-slate-100 pb-1">
+                  {section.title}
+                </h3>
+                <ItemsTable items={section.items} onItemsChange={handleItemsChange} editable={false} showAddButton={false} />
+                <div className="flex justify-end pr-4">
+                  <p className="text-sm font-semibold text-slate-600">
+                    Section Subtotal: Rs {calculations.perSectionTotals[section.id]?.toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
 
           <TotalsSummary
             subtotal={calculations.subtotal}

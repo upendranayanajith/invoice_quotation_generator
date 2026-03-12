@@ -1,8 +1,14 @@
-interface Item {
+export interface Item {
   id: number
   name: string
   quantity: number
   unitPrice: number
+}
+
+export interface Section {
+  id: number
+  title: string
+  items: Item[]
 }
 
 interface CalculationResults {
@@ -12,6 +18,7 @@ interface CalculationResults {
   tax?: number
   grandTotal: number
   perItemTotals: Record<number, number>
+  perSectionTotals: Record<number, number>
 }
 
 export function calculateItemsTotal(items: Item[]): number {
@@ -47,29 +54,39 @@ export function calculateItemTotal(quantity: number, unitPrice: number): number 
 }
 
 export function getAllCalculations(
-  items: Item[],
+  sections: Section[],
   discountValue: number,
   discountType: "percentage" | "fixed",
   taxRate = 0,
 ): CalculationResults {
-  const subtotal = calculateItemsTotal(items)
+  const perSectionTotals: Record<number, number> = {}
+  const perItemTotals: Record<number, number> = {}
+
+  let itemsTotal = 0
+
+  sections.forEach((section) => {
+    const sectionTotal = calculateItemsTotal(section.items)
+    perSectionTotals[section.id] = sectionTotal
+    itemsTotal += sectionTotal
+
+    section.items.forEach((item) => {
+      perItemTotals[item.id] = calculateItemTotal(item.quantity, item.unitPrice)
+    })
+  })
+
+  const subtotal = itemsTotal
   const discount = calculateDiscount(subtotal, discountValue, discountType)
   const tax = calculateTax(subtotal - discount, taxRate)
   const grandTotal = calculateGrandTotal(subtotal, discount, tax)
 
-  // Calculate per-item totals for reference
-  const perItemTotals: Record<number, number> = {}
-  items.forEach((item) => {
-    perItemTotals[item.id] = calculateItemTotal(item.quantity, item.unitPrice)
-  })
-
   return {
-    itemsTotal: subtotal,
+    itemsTotal,
     subtotal,
     discount,
     tax,
     grandTotal,
     perItemTotals,
+    perSectionTotals,
   }
 }
 
