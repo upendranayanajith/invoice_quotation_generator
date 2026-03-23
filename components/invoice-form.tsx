@@ -20,6 +20,7 @@ export interface Section {
   id: number
   title: string
   items: Item[]
+  multiplier: number
 }
 
 export interface FormData {
@@ -69,7 +70,8 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
     const newSection: Section = {
       id: newId,
       title: `Section ${newId}`,
-      items: [{ id: Date.now(), name: "", quantity: 1, unitPrice: 0 }]
+      items: [{ id: Date.now(), name: "", quantity: 1, unitPrice: 0 }],
+      multiplier: 1,
     };
     onFormChange({ ...formData, sections: [...formData.sections, newSection] });
   }
@@ -193,6 +195,17 @@ export default function InvoiceForm({ documentType, formData, onFormChange }: In
                   onChange={(e) => handleSectionChange(section.id, "title", e.target.value)}
                   placeholder="e.g., Labor Charges, Material Costs..."
                   className="mt-1 border-slate-200 bg-white font-semibold text-slate-800"
+                />
+              </div>
+              <div className="w-32 shrink-0">
+                <Label className="text-xs font-bold uppercase tracking-wider text-slate-500">Multiplier (×)</Label>
+                <Input
+                  type="number"
+                  min={1}
+                  step={1}
+                  value={section.multiplier ?? 1}
+                  onChange={(e) => handleSectionChange(section.id, "multiplier", Math.max(1, Number(e.target.value)))}
+                  className="mt-1 border-slate-200 bg-white text-slate-800 text-center font-semibold"
                 />
               </div>
               {formData.sections.length > 1 && (

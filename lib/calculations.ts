@@ -9,6 +9,7 @@ export interface Section {
   id: number
   title: string
   items: Item[]
+  multiplier: number
 }
 
 interface CalculationResults {
@@ -65,7 +66,9 @@ export function getAllCalculations(
   let itemsTotal = 0
 
   sections.forEach((section) => {
-    const sectionTotal = calculateItemsTotal(section.items)
+    const multiplier = section.multiplier ?? 1
+    const rawSectionTotal = calculateItemsTotal(section.items)
+    const sectionTotal = rawSectionTotal * multiplier
     perSectionTotals[section.id] = sectionTotal
     itemsTotal += sectionTotal
 

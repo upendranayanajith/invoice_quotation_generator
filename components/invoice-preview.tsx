@@ -19,6 +19,7 @@ export interface Section {
   id: number
   title: string
   items: Item[]
+  multiplier: number
 }
 
 export interface FormData {
@@ -111,19 +112,34 @@ export default function InvoicePreview({ documentType, formData }: InvoicePrevie
 
           {/* Sections Loop */}
           <div className="space-y-4">
-            {formData.sections.map((section) => (
-              <div key={section.id} className="space-y-2 print:break-inside-avoid">
-                <h3 className="text-md font-bold uppercase tracking-wide text-slate-700 border-b border-slate-100 pb-1">
-                  {section.title}
-                </h3>
-                <ItemsTable items={section.items} onItemsChange={handleItemsChange} editable={false} showAddButton={false} />
-                <div className="flex justify-end pr-4">
-                  <p className="text-sm font-semibold text-slate-600">
-                    Total: Rs {calculations.perSectionTotals[section.id]?.toFixed(2)}
-                  </p>
+            {formData.sections.map((section) => {
+              const multiplier = section.multiplier ?? 1
+              const sectionTotal = calculations.perSectionTotals[section.id] ?? 0
+              const rawTotal = multiplier > 1 ? sectionTotal / multiplier : sectionTotal
+              return (
+                <div key={section.id} className="space-y-2 print:break-inside-avoid">
+                  <h3 className="text-md font-bold uppercase tracking-wide text-slate-700 border-b border-slate-100 pb-1 flex items-center gap-2">
+                    {section.title}
+                    {multiplier > 1 && (
+                      <span className="text-xs font-semibold bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
+                        &times;{multiplier}
+                      </span>
+                    )}
+                  </h3>
+                  <ItemsTable items={section.items} onItemsChange={handleItemsChange} editable={false} showAddButton={false} />
+                  <div className="flex justify-end pr-4 flex-col items-end gap-0.5">
+                    {multiplier > 1 && (
+                      <p className="text-xs text-slate-400">
+                        Unit subtotal: Rs {rawTotal.toFixed(2)} &times; {multiplier}
+                      </p>
+                    )}
+                    <p className="text-sm font-semibold text-slate-600">
+                      {multiplier > 1 ? "Section Total" : "Total"}: Rs {sectionTotal.toFixed(2)}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           <div className="print:break-inside-avoid">

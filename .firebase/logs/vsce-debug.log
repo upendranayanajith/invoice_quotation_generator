@@ -396,3 +396,96 @@ I0312 08:23:04.170996    7796 load.go:109] Finished reloading
 [debug] [2026-03-12T04:16:26.239Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
 [debug] [2026-03-12T04:16:26.390Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
 [debug] [2026-03-12T04:16:26.391Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[warn] !  Data Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-03-13T14:47:15.207Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-03-13T14:47:29.223Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-03-13T14:47:29.249Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-13T14:47:29.250Z] > authorizing via signed-in user (upendranayanajithup@gmail.com)
+[debug] [2026-03-13T14:47:29.256Z] Checked if tokens are valid: false, expires at: 1773292584259
+[debug] [2026-03-13T14:47:29.258Z] Checked if tokens are valid: false, expires at: 1773292584259
+[debug] [2026-03-13T14:47:29.259Z] > refreshing access token with scopes: []
+[debug] [2026-03-13T14:47:29.263Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-03-13T14:47:29.264Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-13T14:47:29.303Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 3.2.1) on port 50001
+[debug] [2026-03-13T14:47:32.339Z] I0313 20:17:32.257801    7344 control.go:100] [projects/emulator/locations/emulator/services/v0-invoice-and-quotation-generator 08b3] UpdateResources(): done
+Main schema: sources: schema\schema.gql [1992B] 
+Connector "example": sources: example\mutations.gql [1243B] example\queries.gql [1801B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0313 20:17:32.257801    7344 control.go:100] [projects/emulator/locations/emulator/services/v0-invoice-and-quotation-generator 08b3] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [1992B] \nConnector \"example\": sources: example\\mutations.gql [1243B] example\\queries.gql [1801B] \n"}}
+[debug] [2026-03-13T14:47:32.342Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-03-13T14:47:32.343Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-03-13T14:47:32.344Z] Starting Data Connect Emulator with command {"binary":"C:\\Users\\upend\\.cache\\firebase\\emulators\\dataconnect-emulator-3.2.1.exe","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=d:\\v0-invoice-and-quotation-generator\\dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"C:\\\\Users\\\\upend\\\\.cache\\\\firebase\\\\emulators\\\\dataconnect-emulator-3.2.1.exe\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=d:\\\\v0-invoice-and-quotation-generator\\\\dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to \u001b[1mdataconnect-debug.log\u001b[22m"}}
+[debug] [2026-03-13T14:47:33.948Z] I0313 20:17:33.688938    8752 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0313 20:17:33.688938    8752 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-03-13T14:47:36.162Z] I0313 20:17:34.407239    8752 control.go:100] [projects/emulator/locations/emulator/services/v0-invoice-and-quotation-generator 9cfa] UpdateResources(): done
+Main schema: sources: schema\schema.gql [1992B] 
+Connector "example": sources: example\mutations.gql [1243B] example\queries.gql [1801B] 
+I0313 20:17:34.899264    8752 codegen.go:80] [connector "example" javascriptSdk] Generating sources into "d:\\v0-invoice-and-quotation-generator\\src\\dataconnect-generated"
+I0313 20:17:34.997620    8752 collector.go:107] schema extensions wrote into "d:\\v0-invoice-and-quotation-generator\\dataconnect\\.dataconnect\\schema"
+Generated sources: main\query.gql [5099B] main\mutation.gql [13679B] prelude.gql [80731B] main\implicit.gql [1261B] main\input.gql [28173B] main\relation.gql [14318B] 
+I0313 20:17:35.103933    8752 collector.go:107] connector "example" javascriptSdk wrote into "d:\\v0-invoice-and-quotation-generator\\src\\dataconnect-generated"
+Generated sources: react\README.md [48299B] .guides/setup.md [1682B] index.d.ts [8025B] package.json [863B] esm\index.esm.js [3584B] README.md [40931B] react\index.d.ts [3961B] react\package.json [460B] react\esm\package.json [17B] esm\package.json [17B] index.cjs.js [4074B] react\index.cjs.js [3439B] react\esm\index.esm.js [3269B] .guides/usage.md [3489B] .guides/config.json [236B] 
+I0313 20:17:35.507351    8752 installsdk.go:55] Package @dataconnect/generated is already installed. Skipping installation
+I0313 20:17:35.508358    8752 load.go:109] Finished reloading
+I0313 20:17:35.699151    8752 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0313 20:17:34.407239    8752 control.go:100] [projects/emulator/locations/emulator/services/v0-invoice-and-quotation-generator 9cfa] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [1992B] \nConnector \"example\": sources: example\\mutations.gql [1243B] example\\queries.gql [1801B] \nI0313 20:17:34.899264    8752 codegen.go:80] [connector \"example\" javascriptSdk] Generating sources into \"d:\\\\v0-invoice-and-quotation-generator\\\\src\\\\dataconnect-generated\"\nI0313 20:17:34.997620    8752 collector.go:107] schema extensions wrote into \"d:\\\\v0-invoice-and-quotation-generator\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: main\\query.gql [5099B] main\\mutation.gql [13679B] prelude.gql [80731B] main\\implicit.gql [1261B] main\\input.gql [28173B] main\\relation.gql [14318B] \nI0313 20:17:35.103933    8752 collector.go:107] connector \"example\" javascriptSdk wrote into \"d:\\\\v0-invoice-and-quotation-generator\\\\src\\\\dataconnect-generated\"\nGenerated sources: react\\README.md [48299B] .guides/setup.md [1682B] index.d.ts [8025B] package.json [863B] esm\\index.esm.js [3584B] README.md [40931B] react\\index.d.ts [3961B] react\\package.json [460B] react\\esm\\package.json [17B] esm\\package.json [17B] index.cjs.js [4074B] react\\index.cjs.js [3439B] react\\esm\\index.esm.js [3269B] .guides/usage.md [3489B] .guides/config.json [236B] \nI0313 20:17:35.507351    8752 installsdk.go:55] Package @dataconnect/generated is already installed. Skipping installation\nI0313 20:17:35.508358    8752 load.go:109] Finished reloading\nI0313 20:17:35.699151    8752 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-03-13T14:47:37.025Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-03-13T14:47:37.027Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-13T14:47:37.147Z] [Firebase Plugin] User found:  upendranayanajithup@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-03-13T14:47:37.154Z] Checked if tokens are valid: true, expires at: 1773416856031
+[debug] [2026-03-13T14:47:37.159Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-03-13T14:47:39.807Z] I0313 20:17:37.783052    8752 engine.go:210] [projects/emulator/locations/emulator/services/v0-invoice-and-quotation-generator 9cfa] ExecuteGraphqlRead query IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0313 20:17:37.783052    8752 engine.go:210] [projects/emulator/locations/emulator/services/v0-invoice-and-quotation-generator 9cfa] ExecuteGraphqlRead query IntrospectionQuery: succeeded. \n"}}
+[debug] [2026-03-13T14:47:43.648Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-03-13T14:47:43.649Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[warn] !  Data Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-03-13T18:26:17.883Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-03-13T18:26:29.198Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-03-13T18:26:29.232Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-13T18:26:29.234Z] > authorizing via signed-in user (upendranayanajithup@gmail.com)
+[debug] [2026-03-13T18:26:29.243Z] Checked if tokens are valid: false, expires at: 1773416856031
+[debug] [2026-03-13T18:26:29.245Z] Checked if tokens are valid: false, expires at: 1773416856031
+[debug] [2026-03-13T18:26:29.247Z] > refreshing access token with scopes: []
+[debug] [2026-03-13T18:26:29.252Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-03-13T18:26:29.253Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-13T18:26:29.307Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[debug] [2026-03-23T06:55:18.501Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-03-23T06:55:27.934Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-03-23T06:55:27.962Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-23T06:55:27.963Z] > authorizing via signed-in user (upendranayanajithup@gmail.com)
+[debug] [2026-03-23T06:55:27.971Z] Checked if tokens are valid: true, expires at: 1774252495366
+[debug] [2026-03-23T06:55:27.972Z] Checked if tokens are valid: true, expires at: 1774252495366
+[debug] [2026-03-23T06:55:27.972Z] [Firebase Plugin] User found:  upendranayanajithup@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-03-23T06:55:27.976Z] Checked if tokens are valid: true, expires at: 1774252495366
+[debug] [2026-03-23T06:55:27.979Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-03-23T06:55:28.018Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 3.2.1) on port 50001
+[debug] [2026-03-23T06:55:31.172Z] I0323 12:25:31.074112   13844 control.go:100] [projects/emulator/locations/emulator/services/v0-invoice-and-quotation-generator d2fa] UpdateResources(): done
+Main schema: sources: schema\schema.gql [1992B] 
+Connector "example": sources: example\mutations.gql [1243B] example\queries.gql [1801B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0323 12:25:31.074112   13844 control.go:100] [projects/emulator/locations/emulator/services/v0-invoice-and-quotation-generator d2fa] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [1992B] \nConnector \"example\": sources: example\\mutations.gql [1243B] example\\queries.gql [1801B] \n"}}
+[debug] [2026-03-23T06:55:31.177Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-03-23T06:55:31.178Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-03-23T06:55:31.180Z] Starting Data Connect Emulator with command {"binary":"C:\\Users\\upend\\.cache\\firebase\\emulators\\dataconnect-emulator-3.2.1.exe","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=d:\\v0-invoice-and-quotation-generator\\dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"C:\\\\Users\\\\upend\\\\.cache\\\\firebase\\\\emulators\\\\dataconnect-emulator-3.2.1.exe\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=d:\\\\v0-invoice-and-quotation-generator\\\\dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to \u001b[1mdataconnect-debug.log\u001b[22m"}}
+[debug] [2026-03-23T06:55:44.029Z] I0323 12:25:32.013625    7240 load.go:31] Reloading schema and connectors...
+I0323 12:25:33.432234    7240 control.go:100] [projects/emulator/locations/emulator/services/v0-invoice-and-quotation-generator 138c] UpdateResources(): done
+Main schema: sources: schema\schema.gql [1992B] 
+Connector "example": sources: example\queries.gql [1801B] example\mutations.gql [1243B] 
+I0323 12:25:33.579074    7240 codegen.go:80] [connector "example" javascriptSdk] Generating sources into "d:\\v0-invoice-and-quotation-generator\\src\\dataconnect-generated"
+I0323 12:25:34.075029    7240 collector.go:107] schema extensions wrote into "d:\\v0-invoice-and-quotation-generator\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [80731B] main\relation.gql [14318B] main\query.gql [5099B] main\mutation.gql [13679B] main\implicit.gql [1261B] main\input.gql [28173B] 
+I0323 12:25:34.215988    7240 collector.go:107] connector "example" javascriptSdk wrote into "d:\\v0-invoice-and-quotation-generator\\src\\dataconnect-generated"
+Generated sources: index.d.ts [8025B] package.json [863B] README.md [40931B] .guides/setup.md [1682B] react\esm\package.json [17B] react\index.cjs.js [3439B] react\esm\index.esm.js [3269B] react\README.md [48299B] esm\index.esm.js [3584B] index.cjs.js [4074B] react\index.d.ts [3961B] .guides/usage.md [3489B] esm\package.json [17B] react\package.json [460B] .guides/config.json [236B] 
+I0323 12:25:34.879137    7240 installsdk.go:55] Package @dataconnect/generated is already installed. Skipping installation
+I0323 12:25:34.882260    7240 load.go:109] Finished reloading
+I0323 12:25:35.073002    7240 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0323 12:25:32.013625    7240 load.go:31] Reloading schema and connectors...\nI0323 12:25:33.432234    7240 control.go:100] [projects/emulator/locations/emulator/services/v0-invoice-and-quotation-generator 138c] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [1992B] \nConnector \"example\": sources: example\\queries.gql [1801B] example\\mutations.gql [1243B] \nI0323 12:25:33.579074    7240 codegen.go:80] [connector \"example\" javascriptSdk] Generating sources into \"d:\\\\v0-invoice-and-quotation-generator\\\\src\\\\dataconnect-generated\"\nI0323 12:25:34.075029    7240 collector.go:107] schema extensions wrote into \"d:\\\\v0-invoice-and-quotation-generator\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: prelude.gql [80731B] main\\relation.gql [14318B] main\\query.gql [5099B] main\\mutation.gql [13679B] main\\implicit.gql [1261B] main\\input.gql [28173B] \nI0323 12:25:34.215988    7240 collector.go:107] connector \"example\" javascriptSdk wrote into \"d:\\\\v0-invoice-and-quotation-generator\\\\src\\\\dataconnect-generated\"\nGenerated sources: index.d.ts [8025B] package.json [863B] README.md [40931B] .guides/setup.md [1682B] react\\esm\\package.json [17B] react\\index.cjs.js [3439B] react\\esm\\index.esm.js [3269B] react\\README.md [48299B] esm\\index.esm.js [3584B] index.cjs.js [4074B] react\\index.d.ts [3961B] .guides/usage.md [3489B] esm\\package.json [17B] react\\package.json [460B] .guides/config.json [236B] \nI0323 12:25:34.879137    7240 installsdk.go:55] Package @dataconnect/generated is already installed. Skipping installation\nI0323 12:25:34.882260    7240 load.go:109] Finished reloading\nI0323 12:25:35.073002    7240 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-03-23T06:55:47.162Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-03-23T06:55:47.167Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]

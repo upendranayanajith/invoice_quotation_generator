@@ -28,7 +28,7 @@ function EditorContent() {
         clientEmail: "",
         clientPhone: "",
         description: "",
-        sections: [{ id: 1, title: "Standard Items", items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }] }],
+        sections: [{ id: 1, title: "Standard Items", items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }], multiplier: 1 }],
         discountType: "percentage" as "percentage" | "fixed",
         discountValue: 0,
         additionalNote: "",
@@ -63,9 +63,17 @@ function EditorContent() {
                         migratingData.sections = [{
                             id: 1,
                             title: "Items",
-                            items: migratingData.items
+                            items: migratingData.items,
+                            multiplier: 1,
                         }];
                         delete migratingData.items;
+                    }
+                    // Ensure all sections have a multiplier (migration for sections without one)
+                    if (migratingData.sections) {
+                        migratingData.sections = migratingData.sections.map((s: any) => ({
+                            ...s,
+                            multiplier: s.multiplier ?? 1,
+                        }));
                     }
 
                     setDocumentType(targetType)
@@ -101,9 +109,17 @@ function EditorContent() {
             migratingData.sections = [{
                 id: 1,
                 title: "Items",
-                items: migratingData.items
+                items: migratingData.items,
+                multiplier: 1,
             }];
             delete migratingData.items;
+        }
+        // Ensure all sections have a multiplier
+        if (migratingData.sections) {
+            migratingData.sections = migratingData.sections.map((s: any) => ({
+                ...s,
+                multiplier: s.multiplier ?? 1,
+            }));
         }
 
         setDocumentType(type)
@@ -120,7 +136,7 @@ function EditorContent() {
                 clientEmail: "",
                 clientPhone: "",
                 description: "",
-                sections: [{ id: 1, title: "Standard Items", items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }] }],
+                sections: [{ id: 1, title: "Standard Items", items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }], multiplier: 1 }],
                 discountValue: 0,
                 additionalNote: "",
                 // Keep documentNumber and date
@@ -139,7 +155,7 @@ function EditorContent() {
                 clientEmail: "",
                 clientPhone: "",
                 description: "",
-                sections: [{ id: 1, title: "Standard Items", items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }] }],
+                sections: [{ id: 1, title: "Standard Items", items: [{ id: 1, name: "", quantity: 1, unitPrice: 0 }], multiplier: 1 }],
                 discountType: "percentage",
                 discountValue: 0,
                 additionalNote: "",
@@ -150,9 +166,10 @@ function EditorContent() {
     const handleSave = async () => {
         if (!documentType) return;
 
-        // Calculate Grand Total across all sections
+        // Calculate Grand Total across all sections (respecting multipliers)
         const itemsTotal = formData.sections.reduce((total, section) => {
-            return total + section.items.reduce((sum, item) => sum + (item.quantity * item.unitPrice), 0);
+            const sectionRaw = section.items.reduce((sum: number, item: any) => sum + (item.quantity * item.unitPrice), 0);
+            return total + sectionRaw * (section.multiplier ?? 1);
         }, 0);
 
         let discountAmount = 0;
